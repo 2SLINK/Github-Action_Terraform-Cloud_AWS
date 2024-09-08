@@ -25,10 +25,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=falconbirds3bucket" \
-                           -backend-config="key=terraform.tfstate" \
-                           -backend-config="region=eu-north-1"
-
+        run: terraform init -chdir=${{ env.CONFIG_DIRECTORY }} \
+         -backend-config="bucket=falconbirds3bucket" \
+         -backend-config="key=App10/terraform.tfstate" \
+         -backend-config="region=eu-north-1"
+          
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
