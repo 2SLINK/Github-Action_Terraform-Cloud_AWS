@@ -25,8 +25,8 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -backend-config="bucket=falconbirds3bucket" \
-                          -backend-config="key=App10/terraform.tfstate" \
-                          -backend-config="region=eu-north-1"
+                           -backend-config="key=App10/terraform.tfstate" \
+                           -backend-config="region=eu-north-1"
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
