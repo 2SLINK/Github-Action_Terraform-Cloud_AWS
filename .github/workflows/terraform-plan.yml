@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout
@@ -25,7 +26,7 @@ jobs:
 
       - name: Terraform Init
         run: terraform init -backend-config="bucket=falconbirds3bucket" \
-                           -backend-config="key=App10/terraform.tfstate" \
+                           -backend-config="key=terraform.tfstate" \
                            -backend-config="region=eu-north-1"
 
       - name: Upload Configuration
