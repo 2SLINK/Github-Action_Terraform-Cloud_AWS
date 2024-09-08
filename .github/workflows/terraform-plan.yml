@@ -1,15 +1,16 @@
 name: 'Terraform init and Terraform plan'
-##
+
 on:
-    push:
-      branches:
-        - main
+  push:
+    branches:
+      - main
+
 env:
   TF_CLOUD_ORGANIZATION: "2SLINK"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "API-Driven"
   CONFIG_DIRECTORY: "./"
-## ...
+
 jobs:
   terraform:
     if: github.repository != '2SLINK/API-Driven'
@@ -18,14 +19,15 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Terraform Init
-        run: terraform init -backend-config="bucket=<your-s3-bucket>" \
-                           -backend-config="key=<your-tf-state-file>" \
-                           -backend-config="region=<your-region>"
+        run: terraform init -backend-config="bucket=falconbirds3bucket" \
+                           -backend-config="key=terraform.tfstate" \
+                           -backend-config="region=eu-north-1"
 
       - name: Upload Configuration
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
